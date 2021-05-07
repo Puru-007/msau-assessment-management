@@ -1,0 +1,20 @@
+<mat-list>
+
+    <div class="col-50">
+      <app-questions-list
+      [questions] = "filteredQuestions"
+      (selected) = "selectQuestion($event)"
+      (searched) = "searchQuestion($event)">
+    </app-questions-list>
+    </div>
+    <br><br>
+    <div class="col-50">
+      <app-questions-details
+      [currQuestion] = "selectedQuestion"
+      (saved) = "createQuestion($event)"
+      (addedOption) = "addOption()"
+      (canceled) = "resetQuestion()">
+    </app-questions-details>
+    </div>
+  
+</mat-list>

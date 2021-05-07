@@ -1,0 +1,18 @@
+<mat-list>
+    <div class="col-50">
+        <app-quiz-list
+        [quizes]="filteredQuiz"
+        (selected)="selectQuiz($event)"
+        (searched)="searchQuiz($event)"
+        ></app-quiz-list>
+    </div>
+    <br><br>
+    <div class="col-50">
+        <app-quiz-details
+            [currQuiz] = "selectedQuiz"
+            [allQuestions] = "allQuestions"
+            (canceled)="resetQuiz()"
+            (saved)="submitQuiz($event)"
+        ></app-quiz-details>
+    </div>
+</mat-list>

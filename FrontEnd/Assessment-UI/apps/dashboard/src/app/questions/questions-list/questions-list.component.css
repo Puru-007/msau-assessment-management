@@ -1,0 +1,9 @@
+mat-card{
+    background-color:white;
+    outline-color: black;
+    text-align: center;
+    width: 600px;
+    padding: 40px 40px;
+    border: 5px solid darkmagenta;
+    margin: auto;    
+}
