@@ -1,0 +1,40 @@
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h3>
+              <span *ngIf="currQuiz.id; else elseBlock"> {{ currQuiz.title }} </span>
+              <ng-template  #elseBlock> Add a quiz </ng-template>
+          </h3>
+        </mat-card-title>
+      </mat-card-header>
+      <form #quizForm="ngForm" (submit)="saved.emit($event)">
+        <mat-card-content>
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Title" type="text" name="title" required
+                [(ngModel)] = "currQuiz.title" [disabled]="currQuiz.id?true:false"
+                >
+            </mat-form-field>
+
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Description" type="text" name="description" required
+            [(ngModel)] = "currQuiz.description" [disabled]="currQuiz.id?true:false"
+              ></textarea>
+          </mat-form-field>
+
+            <app-search (keyPress)="filterQuestions($event)"></app-search>
+          <div class="questionList__container">
+            <section *ngFor="let question of filteredQuestions;" class="questionList__list">
+              <mat-checkbox [name]="question.id" [value]="question.id" [checked]="checkQuestionExists(question)"
+              [disabled]="currQuiz.id?true:false">
+                  {{question.description}}
+                </mat-checkbox>
+            </section>
+          </div>
+          
+        </mat-card-content>
+        <mat-card-actions>
+          <button *ngIf="!currQuiz.id" type="submit" mat-button color="primary" [disabled]="!quizForm.form.valid" >Save</button>
+          <button type="button" mat-button (click)="canceled.emit()">Cancel</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>

@@ -1,0 +1,37 @@
+<mat-card>
+    <div *ngIf="exam; else selectBlock">
+        <mat-card-header>
+            <mat-card-title>
+                {{exam.title}}
+            </mat-card-title>
+            <mat-card-subtitle>
+                {{exam.description}}
+            </mat-card-subtitle>
+        </mat-card-header>
+        <form *ngIf="exam.questions" (submit)="evaluate.emit(exam)" #examForm="ngForm">
+            <mat-card-content>
+                <section *ngFor="let question of exam.questions">
+                    <label id="example-radio-group-label">{{question.description}}</label>
+                    <mat-radio-group
+                    [name]="question.id" required
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group"
+                    [(ngModel)]="question.correctOption">
+                    <mat-radio-button class="example-radio-button" *ngFor="let option of question.options; let i = index"
+                    [value]="i">
+                    {{option["data"]}}
+                </mat-radio-button>
+            </mat-radio-group>
+            <mat-divider></mat-divider>
+        </section>
+    </mat-card-content>
+    <mat-card-actions>
+        <button type="submit" mat-button color="primary" [disabled]="!examForm.form.valid">Submit</button>
+    </mat-card-actions>
+</form>
+</div>
+<br>
+<ng-template #selectBlock>
+    <br>
+</ng-template>
+</mat-card>
